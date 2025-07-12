@@ -3,40 +3,39 @@ name: Publish Package to npm
 on:
   push:
     branches:
-      - main   # main ব্রাঞ্চে পুশ হলে চালাবে
+      - main
 
 jobs:
   publish-npm:
     runs-on: ubuntu-latest
 
     steps:
-      # কোড ক্লোন করা
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Node.js সেটআপ (version 20)
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '20.18.1'
           registry-url: 'https://registry.npmjs.org'
 
-      # ডিপেন্ডেন্সি ইনস্টল করা
+      - name: Create .npmrc file
+        run: echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+
       - name: Install dependencies
         run: npm ci
 
-      # প্রোজেক্ট বিল্ড করা (যদি থাকে)
       - name: Build project
         run: npm run build
 
-      # npm authentication যাচাই (অপশনাল, কিন্তু ডিবাগের জন্য দরকার)
-      - name: Check npm authentication
+      - name: Verify NPM Auth
         run: npm whoami
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
 
-      # প্যাকেজ পাবলিশ করা
       - name: Publish to npm
-        run: npm publish
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
