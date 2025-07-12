@@ -1,5 +1,5 @@
 {
-  "name": "shourov-media-downloader",
+  "name": "shourov-media-downloader-v2",
   "version": "1.0.0",
   "description": "Downloader for YouTube, Twitter, Instagram, TikTok, Facebook, etc.",
   "main": "index.js",
