@@ -1,0 +1,38 @@
+{
+  "name": "all-media-downloader",
+  "version": "1.0.0",
+  "description": "Downloader for YouTube, Twitter, Instagram, TikTok, Facebook, etc.",
+  "main": "index.js",
+  "type": "module",
+  "exports": {
+    "import": "./src/index.js"
+  },
+  "scripts": {
+    "build": "babel src --out-dir dist --extensions \".js\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "downloader",
+    "youtube",
+    "twitter",
+    "instagram",
+    "facebook",
+    "tiktok",
+    "media"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.28.0",
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0"
+  },
+  "dependencies": {
+    "@bochilteam/scraper": "^5.0.1",
+    "@distube/ytdl-core": "^4.16.11",
+    "cheerio": "^1.0.0-rc.12",
+    "fb-video-downloader": "^1.0.3",
+    "get-twitter-media": "^2.0.8",
+    "zod": "^4.0.5"
+  }
+}
